@@ -31,6 +31,7 @@
                 @Html.DisplayFor(modelItem => item.DefaultDays)
             </td>
             <td>
+                <button type="button" class="btn btn-primary allocate-btn" data-leave-type-id="@item.Id">Allocate Leave</button>
                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"> <i class="fas fa-edit"></i> </a> 
                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-info-circle"></i> </a> 
                 <button type="button" class="btn btn-danger delete-btn" data-leave-type-id="@item.Id"><i class="fas fa-trash"></i></button>
@@ -40,15 +41,19 @@
     </tbody>
 </table>
 
-    <form asp-action="Delete">
+    <form asp-action="Delete" id="delete-form">
         <input type="hidden" id="LeaveTypeId" name="Id" />
+    </form>
+
+    <form asp-action="AllocateLeave" id="allocate-leave-form">
+        <input type="hidden" id="AllocateLeaveLeaveTypeId" name="Id" />
     </form>
 
     @section Scripts
     {
         <script>
             $(function() {
-                 $('#leave-type-list').DataTable();
+                 $('.table').DataTable();
 
                 $(".delete-btn").on("click", (e, y) => { 
                     let btn = $(e.currentTarget);
@@ -63,7 +68,25 @@
                             debugger;
                             let leaveTypeId = btn.attr('data-leave-type-id');
                             $("#LeaveTypeId").val(leaveTypeId);
-                            $("form").submit();
+                            $("#delete-form").submit();
+                        }
+                    });
+                });
+
+                $(".allocate-btn").on("click", (e, y) => { 
+                    let btn = $(e.currentTarget);
+                    swal({
+                    title: 'Confirm Allocation',
+                    text: 'Are you sure you want to allocate leave?',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true
+                    }).then((confirm) => { 
+                        if(confirm){
+                            debugger;
+                            let leaveTypeId = btn.attr('data-leave-type-id');
+                            $("#AllocateLeaveLeaveTypeId").val(leaveTypeId);
+                            $("#allocate-leave-form").submit();
                         }
                     });
                 });

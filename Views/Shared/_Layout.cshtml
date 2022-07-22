@@ -33,7 +33,10 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">My Leave</a>
                         </li>
                         @if (User.IsInRole(Roles.Administrator))
-                        {                            
+                        {     
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Employees" asp-action="Index">Employees</a>
+                            </li>                            
                             <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">System</a>
                             <ul class="dropdown-menu">
@@ -67,6 +70,11 @@
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>    
     <script src="~/js/site.js" asp-append-version="true"></script>
+        <script>
+            $(function() {
+                 $('.table').DataTable();
+            });
+        </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

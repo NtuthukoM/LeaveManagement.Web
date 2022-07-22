@@ -22,6 +22,7 @@ builder.Services.AddAutoMapper(typeof(MapperConfig));
 builder.Services.AddTransient<IEmailSender>(x => new CustomEmailSender("localhost", 25, "no-reply@leavemanagement.com"));
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
+builder.Services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
