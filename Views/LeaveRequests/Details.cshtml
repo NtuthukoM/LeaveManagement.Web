@@ -1,0 +1,75 @@
+﻿@model LeaveRequestVM
+
+@{
+    ViewData["Title"] = "Leave Request Details";
+}
+
+<h1>Leave Request Details</h1>
+
+<div class="alert alert-@Model.HeadingCssClass" role="alert">
+ <h4 class="alert-heading">@Model.HeadingText</h4>
+ <hr />
+  <p>
+      <strong>Employee Name: </strong> @Model.Employee.FristName @Model.Employee.LastName
+  </p>
+  <p>
+      <strong> @Html.DisplayNameFor(model => model.DateRequested)</strong> @Html.DisplayFor(model => model.DateRequested)
+  </p>
+</div>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LeaveType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LeaveType.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestComments)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RequestComments)
+        </dd>
+    </dl>
+</div>
+<div>
+        <div class="row">
+    @if(Model.Approved == null)
+    {
+        <div class="col-md-1">
+            <form  asp-action="ApproveRequest">
+                <input asp-for="Id" type="hidden">
+                <input name="Approved" value="true" type="hidden">
+                <button class="btn btn-success">Approve</button>
+            </form>
+        </div>
+        <div class="col-md-1">
+
+            <form  asp-action="ApproveRequest">
+                <input asp-for="Id" type="hidden">
+                <input name="Approved" value="false" type="hidden">
+                <button class="btn btn-danger" >Reject</button>
+            </form>
+        </div>
+    }
+        <div class="col-md-3">
+
+    <a class="btn btn-dark" asp-action="Index">Back to List</a>
+        </div>
+        </div>
+</div>

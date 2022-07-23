@@ -16,3 +16,6 @@ html {
 body {
   margin-bottom: 60px;
 }
+.form-group, .card{
+    margin-bottom:15px;
+}

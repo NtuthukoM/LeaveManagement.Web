@@ -96,5 +96,13 @@ namespace LeaveManagement.Web.Repositories
             leaveAllocation.NumberOfDays = model.NumberOfDays;
             await UpdateAsync(leaveAllocation);
         }
+
+        public async Task<LeaveAllocation?> GetEmployeeAllocationAsync(string employeeId, int leaveTypeId)
+        {
+            return await context.LeaveAllocation.FirstOrDefaultAsync(x =>
+                x.EmployeeId == employeeId
+                && x.LeaveTypeId == leaveTypeId
+            );
+        }
     }
 }

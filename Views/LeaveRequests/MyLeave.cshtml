@@ -1,0 +1,145 @@
+﻿@model EmployeeLeaveRequestViewVM
+@{
+    ViewData["Title"] = "My Leave";
+}
+
+<div class="card">
+  <div class="card-header">
+    Leave Allocations
+  </div>
+  <ul class="list-group list-group-flush">
+        @foreach(var allocation in Model.LeaveAllocations)
+        {            
+            <li class="list-group-item">
+               <strong>@allocation.LeaveType.Name </strong> 
+
+                <button type="button" class="btn btn-primary position-relative">
+                  Allocated
+                  <span class="badge rounded-pill bg-danger">
+                    @allocation.LeaveType.DefaultDays
+                  </span>
+                </button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-primary position-relative">
+                  Remaining
+                  <span class="badge rounded-pill bg-danger">
+                    @allocation.NumberOfDays   
+                  </span>
+                </button>
+            </li>
+        }
+  </ul>
+</div>
+<hr />
+<h2>Current requests</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                Number of days
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateRequested)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Approved)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.LeaveRequests) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfDays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateRequested)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeaveType.Name)
+            </td>
+            <td>
+                @if (item.Canceled == true)
+                    {
+                      <span class="badge rounded-pill bg-mute">
+                        <i class="fa fa-trash"></i>
+                      </span>                        
+                    }else if (item.Approved == true)
+                    {
+                      <span class="badge rounded-pill bg-success">
+                        <i class="fa fa-check"></i>
+                      </span>                        
+                    }else if (item.Approved == false)
+                    {
+                      <span class="badge rounded-pill bg-danger">
+                        <i class="fa fa-times"></i>
+                        </span>
+                    }
+                    else
+                    {
+                      <span class="badge rounded-pill bg-warning">
+                        <i class="fa fa-clock"></i>
+                        </span>                        
+                    }
+            </td>
+
+            <td>
+                @if (!item.Canceled)
+                {                        
+                    <a class="btn btn-danger cancel-btn" 
+                    data-leave-request-id="@item.Id"
+                    >Cancel Request</a> 
+
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+    <form asp-action="CancelRequest" id="delete-form">
+        <input type="hidden" id="LeaveRequestId" name="Id" />
+    </form>
+
+    @section Scripts
+    {
+        <script>
+            $(function() {
+                 $('.table').DataTable();
+
+                $(".cancel-btn").on("click", (e, y) => { 
+                    let btn = $(e.currentTarget);
+                    swal({
+                    title: 'Cancel Request',
+                    text: 'Are you sure you want to cancel?',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true
+                    }).then((confirm) => { 
+                        if(confirm){
+                            debugger;
+                            let leaveRequestId = btn.attr('data-leave-request-id');
+                            $("#LeaveRequestId").val(leaveRequestId);
+                            $("#delete-form").submit();
+                        }
+                    });
+                });
+
+            });
+        </script>
+    }
