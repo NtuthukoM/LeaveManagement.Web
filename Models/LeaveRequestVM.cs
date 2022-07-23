@@ -1,10 +1,18 @@
-﻿namespace LeaveManagement.Web.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LeaveManagement.Web.Models
 {
     public class LeaveRequestVM
     {
         public int Id { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
         public DateTime DateRequested { get; set; }
         public int LeaveTypeId { get; set; }
         public LeaveTypeVM LeaveType { get; set; }

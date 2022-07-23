@@ -6,9 +6,13 @@ namespace LeaveManagement.Web.Models
     public class LeaveRequestCreateVM:IValidatableObject
     {
         [Display(Name = "Start Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
         [Required]
         public DateTime? StartDate { get; set; } = null;
         [Display(Name = "End Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
         [Required]
         public DateTime? EndDate { get; set; } = null;
         [Display(Name= "Leave Type")]

@@ -15,8 +15,12 @@ namespace LeaveManagement.Web.Models
         public List<LeaveRequestVM> LeaveRequests { get; set; }
 
         [Display(Name = "Start Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
         public DateTime? StartDate { get; set; } = null;
         [Display(Name = "End Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; } = null;
         [Display(Name = "Leave Type")]
         public int LeaveTypeId { get; set; }

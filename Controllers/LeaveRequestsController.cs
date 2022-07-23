@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using LeaveManagement.Web.Constants;
+using LeaveManagement.Web.Contracts;
+using LeaveManagement.Web.Data;
+using LeaveManagement.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LeaveManagement.Web.Data;
-using LeaveManagement.Web.Models;
-using AutoMapper;
-using LeaveManagement.Web.Contracts;
-using Microsoft.AspNetCore.Authorization;
-using LeaveManagement.Web.Constants;
 
 namespace LeaveManagement.Web.Controllers
 {
@@ -52,7 +48,7 @@ namespace LeaveManagement.Web.Controllers
                 {
                     return NotFound();
                 }
-                var model  = await leaveRequestRepository.GetLeaveRequestAsync(id.Value);
+                var model = await leaveRequestRepository.GetLeaveRequestAsync(id.Value);
                 return View(model);
             }
             catch (ApplicationException)
@@ -119,7 +115,7 @@ namespace LeaveManagement.Web.Controllers
                 ModelState.AddModelError(string.Empty, "Error saving, please try again.");
             }
 
-            model.LeaveTypes = new SelectList(_context.LeaveTypes, "Id", "Name", 
+            model.LeaveTypes = new SelectList(_context.LeaveTypes, "Id", "Name",
                 model.LeaveTypeId);
             return View(model);
         }
@@ -210,14 +206,14 @@ namespace LeaveManagement.Web.Controllers
             {
                 _context.LeaveRequests.Remove(leaveRequest);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LeaveRequestExists(int id)
         {
-          return (_context.LeaveRequests?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.LeaveRequests?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
