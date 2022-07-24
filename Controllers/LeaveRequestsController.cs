@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using LeaveManagement.Web.Constants;
-using LeaveManagement.Web.Contracts;
-using LeaveManagement.Web.Data;
-using LeaveManagement.Web.Models;
+using LeaveManagement.Common.Constants;
+using LeaveManagement.Core.Contracts;
+using LeaveManagement.Data;
+using LeaveManagement.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,13 +16,16 @@ namespace LeaveManagement.Web.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IMapper mapper;
         private readonly ILeaveRequestRepository leaveRequestRepository;
+        private readonly ILogger<LeaveRequestsController> logger;
 
         public LeaveRequestsController(ApplicationDbContext context,
-            IMapper mapper, ILeaveRequestRepository leaveRequestRepository)
+            IMapper mapper, ILeaveRequestRepository leaveRequestRepository,
+            ILogger<LeaveRequestsController> logger)
         {
             _context = context;
             this.mapper = mapper;
             this.leaveRequestRepository = leaveRequestRepository;
+            this.logger = logger;
         }
 
         [Authorize(Roles = Roles.Administrator)]
@@ -30,6 +33,7 @@ namespace LeaveManagement.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var model = await leaveRequestRepository.GetAdminLeaveRequestList();
+            throw new Exception("Testing the error logs...");
             return View(model);
         }
 
@@ -66,9 +70,10 @@ namespace LeaveManagement.Web.Controllers
             {
                 await leaveRequestRepository.ChangeApprovalStatus(id, approved);
             }
-            catch
+            catch(Exception exc)
             {
-
+                logger.LogError(exc, "Error approving leave request.");
+                throw;
             }
             return RedirectToAction(nameof(Index));
         }
@@ -77,8 +82,16 @@ namespace LeaveManagement.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CancelRequest(int id)
         {
-            await leaveRequestRepository.CancelRequest(id);
-            return RedirectToAction(nameof(MyLeave));
+            try
+            {
+                await leaveRequestRepository.CancelRequest(id);
+                return RedirectToAction(nameof(MyLeave));
+            }
+            catch(Exception exc)
+            {
+                logger.LogError(exc, "Error cancelling leave request.");
+                throw;
+            }
         }
 
         // GET: LeaveRequests/Create
@@ -110,8 +123,9 @@ namespace LeaveManagement.Web.Controllers
             {
                 ModelState.AddModelError(string.Empty, exc.Message);
             }
-            catch
+            catch(Exception exc)
             {
+                logger.LogError(exc, "Error creating leave request.");
                 ModelState.AddModelError(string.Empty, "Error saving, please try again.");
             }
 
