@@ -3,13 +3,17 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create Leave Type</h1>
-
-<hr />
+@section PageHeading{
+Leave Type
+}
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <div class="col-md-6">
+<div class="card shadow mb-4">
+	<div class="card-header py-3">
+		<h6 class="m-0 font-weight-bold text-primary">Create Leave Type</h6>
+	</div>
+	<div class="card-body">
+<form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -23,9 +27,13 @@
             </div>
                 <br />
                 <div class="form-group">
-                     <a asp-action="Index" class="btn btn-dark">Back to List</a>
+                     
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
         </form>
+	</div>
+</div>        
     </div>
 </div>
+
+<a asp-action="Index" >Back to List</a>

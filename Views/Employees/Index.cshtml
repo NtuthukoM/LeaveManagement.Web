@@ -47,7 +47,7 @@ Employees
                             @Html.DisplayFor(modelItem => item.DateJoined)
                         </td>
                         <td>
-                            <a asp-action="ViewAllocations" class="btn btn-info" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a>
+                            <a asp-action="ViewAllocations" class="btn-circle btn btn-sm btn-info"  data-bs-toggle="tooltip" asp-route-id="@item.Id" title="Show allocations"><i class="fas fa-info-circle"></i></a>
                         </td>
                     </tr>
             }

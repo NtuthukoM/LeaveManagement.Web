@@ -145,23 +145,23 @@ Admin Leave Requests
             <td>
                 @if (item.Canceled == true)
                     {
-                      <span class="badge rounded-pill bg-mute">
+                      <span class="btn btn-circle btn-secondary btn-sm" data-bs-toggle="tooltip" title="Cancelled">
                         <i class="fa fa-trash"></i>
                       </span>                        
                     }else if (item.Approved == true)
                     {
-                      <span class="badge rounded-pill bg-success">
+                      <span class="btn btn-circle btn-success btn-sm" data-bs-toggle="tooltip" title="Approved">
                         <i class="fa fa-check"></i>
                       </span>                        
                     }else if (item.Approved == false)
                     {
-                      <span class="badge rounded-pill bg-danger">
+                      <span class="btn btn-circle btn-danger btn-sm" data-bs-toggle="tooltip" title="Rejected">
                         <i class="fa fa-times"></i>
                         </span>
                     }
                     else
                     {
-                      <span class="badge rounded-pill bg-warning">
+                      <span class="btn btn-circle btn-warning btn-sm" data-bs-toggle="tooltip" title="Pending">
                         <i class="fa fa-clock"></i>
                         </span>                        
                     }
@@ -170,7 +170,7 @@ Admin Leave Requests
             <td>
                     @if (!item.Canceled)
                     {                        
-                        <a asp-action="Details" class="btn btn-warning" asp-route-id="@item.Id">Review</a> 
+                        <a asp-action="Details" class="btn btn-warning btn-sm" asp-route-id="@item.Id">Review</a> 
                     }
             </td>
         </tr>

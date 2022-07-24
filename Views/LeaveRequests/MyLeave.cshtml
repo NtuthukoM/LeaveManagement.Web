@@ -13,14 +13,14 @@
             <li class="list-group-item">
                <strong>@allocation.LeaveType.Name </strong> 
 
-                <button type="button" class="btn btn-primary position-relative">
+                <button type="button" class="btn btn-info position-relative btn-sm">
                   Allocated
                   <span class="badge rounded-pill bg-danger">
                     @allocation.LeaveType.DefaultDays
                   </span>
                 </button>
                 &nbsp;&nbsp;
-                <button type="button" class="btn btn-primary position-relative">
+                <button type="button" class="btn btn-info position-relative btn-sm">
                   Remaining
                   <span class="badge rounded-pill bg-danger">
                     @allocation.NumberOfDays   
@@ -77,23 +77,23 @@
             <td>
                 @if (item.Canceled == true)
                     {
-                      <span class="badge rounded-pill bg-mute">
+                      <span class="btn btn-circle btn-secondary btn-sm" data-bs-toggle="tooltip" title="Cancelled">
                         <i class="fa fa-trash"></i>
                       </span>                        
                     }else if (item.Approved == true)
                     {
-                      <span class="badge rounded-pill bg-success">
+                      <span class="btn btn-circle btn-success btn-sm" data-bs-toggle="tooltip" title="Approved">
                         <i class="fa fa-check"></i>
                       </span>                        
                     }else if (item.Approved == false)
                     {
-                      <span class="badge rounded-pill bg-danger">
+                      <span class="btn btn-circle btn-danger btn-sm" data-bs-toggle="tooltip" title="Rejected">
                         <i class="fa fa-times"></i>
                         </span>
                     }
                     else
                     {
-                      <span class="badge rounded-pill bg-warning">
+                      <span class="btn btn-circle btn-warning btn-sm" data-bs-toggle="tooltip" title="Pending">
                         <i class="fa fa-clock"></i>
                         </span>                        
                     }
@@ -102,7 +102,7 @@
             <td>
                 @if (!item.Canceled)
                 {                        
-                    <a class="btn btn-danger cancel-btn" 
+                    <a class="btn btn-danger cancel-btn btn-sm" 
                     data-leave-request-id="@item.Id"
                     >Cancel Request</a> 
 

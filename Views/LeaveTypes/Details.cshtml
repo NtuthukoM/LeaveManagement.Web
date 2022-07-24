@@ -4,10 +4,19 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Leave Type Details</h1>
+@section PageHeading{
+Leave Type
+}
 
+<div class="row">
+    <div class="col-md-6">
+<div class="card shadow mb-4">
+	<div class="card-header py-3">
+		<h6 class="m-0 font-weight-bold text-primary">Leave Type Details</h6>
+	</div>
+	<div class="card-body">
 <div>
-    <hr />
+
     <dl class="row">
         <dt class = "col-sm-4">
             @Html.DisplayNameFor(model => model.Name)
@@ -22,9 +31,14 @@
             @Html.DisplayFor(model => model.DefaultDays)
         </dd>
     </dl>
+    <hr />
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Edit</a>
 </div>
-<br />
+	</div>
+</div>
+    </div>
+</div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-dark">Edit</a> |
-    <a asp-action="Index" class="btn btn-warning">Back to List</a>
+    <a asp-action="Index">Back to List</a>
 </div>

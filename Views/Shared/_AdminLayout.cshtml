@@ -47,7 +47,7 @@
             <li class="nav-item">
 
                     <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                                            <i class="fas fa-fw fa-home"></i>
                     <span>Home</span></a>
                     
             </li>
@@ -64,14 +64,14 @@
             </div>
             <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-controller="LeaveRequests" asp-action="Create">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-fw fa-edit"></i>
                                     <span>Apply For Leave</span>
                 </a>
             </li>                
 
             <li class="nav-item">
                     <a class="nav-link " asp-area="" asp-controller="LeaveRequests" asp-action="MyLeave">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-fw fa-list"></i>
                     <span>My Leave</span>
                     </a>
             </li>
@@ -90,19 +90,19 @@
 
                 <li class="nav-item">
                     <a class="nav-link" asp-area="" asp-controller="Employees" asp-action="Index">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-employees"></i>
                     <span>Employees</span>
                     </a>
                 </li>   
                 <li class="nav-item">
                     <a  class="nav-link" asp-controller="LeaveTypes" asp-action="Index">
-                                            <i class="fas fa-fw fa-table"></i>
+                                            <i class="fas fa-fw fa-cubes"></i>
                                         <span>Leave Types</span>
                     </a>
                 </li>   
                 <li class="nav-item">
                     <a  class="nav-link" asp-controller="LeaveRequests" asp-action="Index">
-                                                                    <i class="fas fa-fw fa-table"></i>
+                                                                    <i class="fas fa-fw fa-clipboard"></i>
                                                             <span>Leave Requests</span>
                     </a>
                 </li>                    
@@ -150,19 +150,6 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -268,6 +255,10 @@
         <script>
             $(function() {
                  $('.table').DataTable();
+                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                      return new bootstrap.Tooltip(tooltipTriggerEl)
+                    })
                  //$('.datepicker').datepicker();
             });
         </script>
