@@ -33,7 +33,6 @@ namespace LeaveManagement.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var model = await leaveRequestRepository.GetAdminLeaveRequestList();
-            throw new Exception("Testing the error logs...");
             return View(model);
         }
 
